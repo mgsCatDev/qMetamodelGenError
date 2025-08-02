@@ -2,7 +2,7 @@
 Just a simple project to show an error in querydsl metamodel generation using maven and the @NotNull annotation
 
 
-This is a pair of entities related mutually through an interface and an abstract class, using this stack:
+This is a project with an @Entity and a @MappedSuperclass, and this stack:
 - java 21 (OpenJDK Runtime Environment build 21.0.8+9)
 - maven 3.9.10
 - jakarta-persistence 3.1.0
@@ -16,7 +16,7 @@ mvn -X -P METAMODEL clean compile
 The error:
 
 ```
-Caused by: java.lang.IllegalStateException: Did not find type  T1 in AbstractE2<?> for E2Impl
+Caused by: java.lang.IllegalStateException: Did not find type  T in AbstractMappedSuperclass<?> for Ent
     at com.querydsl.codegen.TypeResolver.resolveVar (TypeResolver.java:74)
     at com.querydsl.codegen.TypeResolver.resolve (TypeResolver.java:45)
     at com.querydsl.codegen.Property.createCopy (Property.java:92)
@@ -25,7 +25,7 @@ Caused by: java.lang.IllegalStateException: Did not find type  T1 in AbstractE2<
 
 ```
 
-And the important thing here is just the space before T1 (" T1"). 
+And the important thing here is just the space before T (" T"). 
 
 I don't know why, but if you remove de validation annotation (@NotNull) then there is no error.
 If the @NotNull is keep, on debugging you can see that the method com.querydsl.codegen.TypeResolver.resolveVar(Type resolved, String varName, Type declaringType, EntityType context)  uses this:

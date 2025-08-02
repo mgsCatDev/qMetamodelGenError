@@ -1,4 +1,4 @@
-package com.mgsCatDev;
+
 
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;

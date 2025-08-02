@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>qMetamodelGen</artifactId>
+  <groupId>com.mgsCatDev</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+
+
+  <properties> 
+    <java.version>21</java.version>
+    <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
+    <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
+    <querydsl.version>5.1.0</querydsl.version>    
+    <hibernate-validator.version>8.0.2.Final</hibernate-validator.version>
+  </properties>
+
+  <dependencies>
+    
+    <dependency>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>${jakarta-persistence.version}</version>    
+    </dependency>
+    
+    <dependency>
+        <groupId>jakarta.annotation</groupId>
+        <artifactId>jakarta.annotation-api</artifactId>
+        <version>${jakarta-annotation.version}</version>     
+    </dependency>
+    
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-jpa</artifactId>
+      <version>${querydsl.version}</version>
+      <classifier>jakarta</classifier>
+    </dependency>
+    
+    <dependency>
+        <artifactId>hibernate-validator</artifactId>
+        <groupId>org.hibernate.validator</groupId>
+        <version>${hibernate-validator.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+    <profile>
+        <id>METAMODEL</id>
+            
+            <build>
+                <plugins>
+
+                    <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-compiler-plugin</artifactId>
+
+                        <configuration>
+                            <release>${java.version}</release>                            
+                            
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>com.querydsl</groupId>
+                                    <artifactId>querydsl-apt</artifactId>
+                                    <classifier>jakarta</classifier>
+                                    <version>${querydsl.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>com.querydsl</groupId>
+                                    <artifactId>querydsl-jpa</artifactId>
+                                    <classifier>jakarta</classifier>
+                                    <version>${querydsl.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>jakarta.persistence</groupId>
+                                    <artifactId>jakarta.persistence-api</artifactId>
+                                    <version>${jakarta-persistence.version}</version>
+                                </path>                                
+                                <path>
+                                    <groupId>jakarta.annotation</groupId>
+                                    <artifactId>jakarta.annotation-api</artifactId>
+                                    <version>${jakarta-annotation.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </plugin>
+                    
+                </plugins>
+ 
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <release>${java.version}</release>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

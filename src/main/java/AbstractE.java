@@ -6,7 +6,7 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 
 @MappedSuperclass
-public abstract class AbstractE2<T1> {
+public abstract class AbstractE<T1> {
 
     @Id
     private Long id;

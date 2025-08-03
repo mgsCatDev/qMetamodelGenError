@@ -10,6 +10,8 @@ public abstract class AbstractMappedSuperclass<T> {
     private Long id;
 
     @NotNull
+    // @NotEmpty
+    // @NotBlank
     private T something;
 
 }
